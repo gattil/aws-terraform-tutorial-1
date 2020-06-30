@@ -21,5 +21,5 @@ variable "sns_topic_arn" {
   type = string
 }
 variable "tags"{
-  default = map(string)
+  type = map(string)
 }
