@@ -29,6 +29,7 @@
 #       username      = var.username
 #     }
 #   }
+#   tags = var.tags
 # }
 
 # resource "aws_iam_role" "unicorn-mng-service" {
@@ -50,6 +51,7 @@
 # }
 # EOF
 #   force_detach_policies = true
+#   tags = var.tags
 # }
 # data "aws_iam_policy_document" "unicorn-mng-service" {
 

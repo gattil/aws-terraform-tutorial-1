@@ -20,3 +20,6 @@ variable "ddb_table_arn"{
 variable "sns_topic_arn" {
   type = string
 }
+variable "tags"{
+  default = map(string)
+}
