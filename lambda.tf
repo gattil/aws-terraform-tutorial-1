@@ -10,7 +10,7 @@ data "archive_file" "zip-call-api-with-response" {
 
 resource "aws_lambda_function" "test_lambda" {
   filename      = data.archive_file.zip-call-api-with-response.output_path
-  function_name = "${var.username}-unicorn-magaement-service"
+  function_name = "${var.username}-unicorn-management-service"
   role          = aws_iam_role.unicorn-mng-service.arn
   handler       = "app.handler"
   timeout       = 3
