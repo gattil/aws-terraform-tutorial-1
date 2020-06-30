@@ -8,7 +8,7 @@
 #   output_path = "${path.module}/lambdas/unicorn-management-service.zip"
 # }
 
-# resource "aws_lambda_function" "test_lambda" {
+# resource "aws_lambda_function" "unicorn-management-service" {
 #   filename      = data.archive_file.zip-call-api-with-response.output_path
 #   function_name = "${var.username}-unicorn-management-service"
 #   role          = aws_iam_role.unicorn-mng-service.arn
