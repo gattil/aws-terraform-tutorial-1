@@ -56,4 +56,25 @@ resource "aws_sns_topic_subscription" "extraordinary-rides-service" {
   topic_arn = aws_sns_topic.ride-completion-topic.arn
   protocol  = "sqs"
   endpoint  = aws_sqs_queue.extraordinary-rides-service.arn
+
+  filter_policy = <<EOF
+  {
+    "fare": [
+      {
+        "numeric": [
+          ">=",
+          50
+        ]
+      }
+    ],
+    "distance": [
+      {
+        "numeric": [
+          ">=",
+          20
+        ]
+      }
+    ]
+  }
+  EOF
 }
