@@ -12,6 +12,7 @@
 #
 #  server_side_encryption {
 #    enabled = true
+#    kms_key_arn = aws_kms_key.unicorn.arn
 #  }
 #
 #  tags = var.tags

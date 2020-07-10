@@ -1,4 +1,4 @@
-resource "aws_sqs_queue" "customer-accounting-service" {
+# resource "aws_sqs_queue" "customer-accounting-service" {
 #   name                       = "${var.username}-customer-accounting-service"
 #   delay_seconds              = 0
 #   max_message_size           = 262144
@@ -6,8 +6,7 @@ resource "aws_sqs_queue" "customer-accounting-service" {
 #   visibility_timeout_seconds = 30
 #   receive_wait_time_seconds  = 0
 
-#   kms_master_key_id                 = "alias/aws/sqs"
-#   kms_data_key_reuse_period_seconds = 300
+#   kms_master_key_id                 = aws_kms_alias.unicorn.name
 
 #   tags = var.tags
 # }
@@ -26,8 +25,7 @@ resource "aws_sqs_queue" "customer-accounting-service" {
 #   visibility_timeout_seconds = 30
 #   receive_wait_time_seconds  = 0
 
-#   kms_master_key_id                 = "alias/aws/sqs"
-#   kms_data_key_reuse_period_seconds = 300
+#   kms_master_key_id                 = aws_kms_alias.unicorn.name
 
 #   tags = var.tags
 # }
@@ -46,8 +44,7 @@ resource "aws_sqs_queue" "customer-accounting-service" {
 #   visibility_timeout_seconds = 30
 #   receive_wait_time_seconds  = 0
 
-#   kms_master_key_id                 = "alias/aws/sqs"
-#   kms_data_key_reuse_period_seconds = 300
+#   kms_master_key_id                 = aws_kms_alias.unicorn.name
 
 #   tags = var.tags
 # }
@@ -78,3 +75,4 @@ resource "aws_sqs_queue" "customer-accounting-service" {
 #   }
 #   EOF
 # }
+

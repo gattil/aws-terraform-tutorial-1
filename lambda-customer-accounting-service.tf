@@ -2,42 +2,42 @@
 # # Lambda for Extraordinary Rides Service
 # # --------------------------------------------------------------------------------
 
-# data "archive_file" "zip-extraordinary-rides-service" {
+# data "archive_file" "zip-customer-accounting-service" {
 #   type        = "zip"
 #   source_file = "${path.module}/lambdas/generic-unicorn-service/app.py"
-#   output_path = "${path.module}/lambdas/extraordinary-rides-service.zip"
+#   output_path = "${path.module}/lambdas/customer-accounting-service.zip"
 # }
 
-# resource "aws_lambda_function" "extraordinary-rides-service" {
-#   filename      = data.archive_file.zip-extraordinary-rides-service.output_path
-#   function_name = "${var.username}-extraordinary-rides-service"
-#   role          = aws_iam_role.extraordinary-rides-service.arn
+# resource "aws_lambda_function" "customer-accounting-service" {
+#   filename      = data.archive_file.zip-customer-accounting-service.output_path
+#   function_name = "${var.username}-customer-accounting-service"
+#   role          = aws_iam_role.customer-accounting-service.arn
 #   handler       = "app.lambda_handler"
 #   timeout       = 3
 
 #   # The filebase64sha256() function is available in Terraform 0.11.12 and later
 #   # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
 #   # source_code_hash = "${base64sha256(file("lambda_function_payload.zip"))}"
-#   source_code_hash = data.archive_file.zip-extraordinary-rides-service.output_base64sha256
+#   source_code_hash = data.archive_file.zip-customer-accounting-service.output_base64sha256
 
 #   runtime = "python3.7"
 
 #   environment {
 #     variables = {
-#       SERVICE_NAME     = "EXTRAORDINARY-RIDES-SERVICE"
+#       SERVICE_NAME     = "customer-accounting-service"
 #     }
 #   }
 #   tags = var.tags
 # }
 
-# resource "aws_lambda_event_source_mapping" "extraordinary-rides-service" {
-#   event_source_arn = aws_sqs_queue.extraordinary-rides-service.arn
-#   function_name    = aws_lambda_function.extraordinary-rides-service.arn
+# resource "aws_lambda_event_source_mapping" "customer-accounting-service" {
+#   event_source_arn = aws_sqs_queue.customer-accounting-service.arn
+#   function_name    = aws_lambda_function.customer-accounting-service.arn
 #   batch_size       = 1
 # }
 
-# resource "aws_iam_role" "extraordinary-rides-service" {
-#   name = "${var.username}-extraordinary-rides-service-role"
+# resource "aws_iam_role" "customer-accounting-service" {
+#   name = "${var.username}-customer-accounting-service-role"
 
 #   assume_role_policy = <<EOF
 # {
@@ -58,13 +58,13 @@
 #   tags = var.tags
 # }
 
-# data "aws_iam_policy_document" "extraordinary-rides-service" {
+# data "aws_iam_policy_document" "customer-accounting-service" {
 
 #   statement {
 #     sid       = "AllowSQS"
 #     effect    = "Allow"
 #     resources = [
-#         aws_sqs_queue.extraordinary-rides-service.arn
+#         aws_sqs_queue.customer-accounting-service.arn
 #       ]
 #     actions   = [
 #                 "sqs:ChangeMessageVisibility",
@@ -74,6 +74,7 @@
 #                 "sqs:GetQueueAttributes",
 #                 "sqs:ReceiveMessage"]
 #   }
+
 #   statement {
 #     sid       = "AllowKMS"
 #     effect    = "Allow"
@@ -86,17 +87,17 @@
 
 # }
 
-# resource "aws_iam_policy" "extraordinary-rides-service" {
-#   policy = data.aws_iam_policy_document.extraordinary-rides-service.json
+# resource "aws_iam_policy" "customer-accounting-service" {
+#   policy = data.aws_iam_policy_document.customer-accounting-service.json
 # }
 
 # # This policy ensures that the Lambda is visible in the VPC
-# resource "aws_iam_role_policy_attachment" "extraordinary-rides-service-standard-lambda-policy" {
-#   role       = aws_iam_role.extraordinary-rides-service.name
+# resource "aws_iam_role_policy_attachment" "customer-accounting-service-standard-lambda-policy" {
+#   role       = aws_iam_role.customer-accounting-service.name
 #   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 # }
-# resource "aws_iam_role_policy_attachment" "extraordinary-rides-service-access-aws-services" {
-#   role       = aws_iam_role.extraordinary-rides-service.name
-#   policy_arn = aws_iam_policy.extraordinary-rides-service.arn
+# resource "aws_iam_role_policy_attachment" "customer-accounting-service-access-aws-services" {
+#   role       = aws_iam_role.customer-accounting-service.name
+#   policy_arn = aws_iam_policy.customer-accounting-service.arn
 # }
 

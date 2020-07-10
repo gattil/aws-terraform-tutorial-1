@@ -24,8 +24,8 @@
 
 #   environment {
 #     variables = {
-#       ddb_table     = var.ddb_table_name
-#       sns_topic_arn = var.sns_topic_arn
+#       ddb_table     = aws_dynamodb_table.ride-requests.name
+#       sns_topic_arn = aws_sns_topic.ride-completion-topic.arn
 #       username      = var.username
 #     }
 #   }
@@ -59,7 +59,7 @@
 #     sid       = "AllowSNSTopic"
 #     effect    = "Allow"
 #     resources = [
-#       var.sns_topic_arn]
+#       aws_sns_topic.ride-completion-topic.arn]
 #     actions   = [
 #       "sns:*"]
 #   }
@@ -67,9 +67,19 @@
 #     sid       = "AllowDynamoDB"
 #     effect    = "Allow"
 #     resources = [
-#       var.ddb_table_arn]
+#       aws_dynamodb_table.ride-requests.arn]
 #     actions   = [
 #       "dynamodb:PutItem"]
+#   }
+
+#   statement {
+#     sid       = "AllowKMS"
+#     effect    = "Allow"
+#     resources = [
+#       "*"]
+#     actions   = [
+#       "kms:Decrypt",
+#       "kms:GenerateDataKey"]
 #   }
 
 # }
